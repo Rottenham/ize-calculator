@@ -1,0 +1,30 @@
+/////////////////////////////////////////////////////////////////////////////
+// Name:        samples/samples.rc
+// Purpose:     a standard MSW .rc file for the wxWidgets samples
+// Author:      Vadim Zeitlin
+// Modified by:
+// Created:     04.08.03
+// Copyright:   (c) 2003 Vadim Zeitlin <vadim@wxwidgets.org>
+// Licence:     wxWindows licence
+/////////////////////////////////////////////////////////////////////////////
+
+// this minimal resource file is all what is needed for most of the wxWidgets
+// samples
+
+// note that the icon used by the Explorer (i.e. the programs icon) is the
+// first icon in the executable and the icons are sorted both by their order
+// and alphabetically (!), so put this icon first and give it a name
+// starting with "a"
+aaaaaaaa ICON "icon.ico"
+
+// this icon is used with wxFrame::SetIcon()
+sample ICON "icon.ico"
+sample2 ICON "icon2.ico"
+sample3 ICON "icon3.ico"
+sample4 ICON "icon4.ico"
+sample5 ICON "icon5.ico"
+
+// set this to 1 if you don't want to use manifest resource (manifest resource
+// is needed to enable visual styles on Windows XP - see docs/msw/winxp.txt
+// for more information)
+#define wxUSE_NO_MANIFEST 0
