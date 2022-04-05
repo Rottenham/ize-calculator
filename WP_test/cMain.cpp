@@ -37,6 +37,7 @@ enum {
 	ID_CHECK_BUTTON,
 	ID_CHANGESUN,
 	ID_CHANGELEVEL,
+	ID_RESETPUFFSHROOM,
 	ID_RATE,
 	ID_RATE_BUTTON,
 	ID_RATE_INPUT1,
@@ -95,7 +96,7 @@ EVT_HOTKEY(HOTKEY_ID_1, OnHotKey1)
 EVT_THREAD(MYTHREAD_UPDATE, OnThreadUpdate)
 wxEND_EVENT_TABLE()
 
-cMain::cMain() : wxFrame(nullptr, wxID_ANY, "IZE血量计算器 v1.5.4", wxDefaultPosition, wxSize(348, 450), (wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) | wxWANTS_CHARS) {
+cMain::cMain() : wxFrame(nullptr, wxID_ANY, "IZE血量计算器 v1.5.5", wxDefaultPosition, wxSize(348, 450), (wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) | wxWANTS_CHARS) {
 	this->RegisterHotKey(HOTKEY_ID_1, (wxMOD_CONTROL), 0x44);
 	cellFont.SetPointSize(10);
 	cellFontBold = cellFont.Bold();
@@ -182,7 +183,7 @@ void cMain::OnExit(wxCommandEvent& evt) {
 }
 
 void cMain::OnAbout(wxCommandEvent& evt) {
-	wxMessageBox("这是一个用于计算IZE单破血量的计算器。\n\n版本号: v1.5.4\n\n开发者: Crescendo\nbilibili: Crescebdo\n贴吧: OTZzzz\n\n使用工具: Visual Studio 2019, wxWidgets 3.1.4",
+	wxMessageBox("这是一个用于计算IZE单破血量的计算器。\n\n版本号: v1.5.5\n\n开发者: Crescendo\nbilibili: Crescebdo\n贴吧: Crescendo\n\n使用工具: Visual Studio 2019, wxWidgets 3.1.4",
 		"关于IZE计算器", wxOK);
 }
 
@@ -269,15 +270,17 @@ void cMain::OnChecker(wxCommandEvent& evt) {
 	b_menuSettings = new wxMenu;
 	b_menuSettings->AppendCheckItem(ID_CHANGESUN, "修改阳光");
 	b_menuSettings->AppendCheckItem(ID_CHANGELEVEL, "修改关数");
+	b_menuSettings->AppendCheckItem(ID_RESETPUFFSHROOM, "小喷归位");
 	b_menuSettings->Check(ID_CHANGESUN, true);
 	b_menuSettings->Check(ID_CHANGELEVEL, true);
+	b_menuSettings->Check(ID_RESETPUFFSHROOM, true);
 	wxMenuBar* b_menuBar = new wxMenuBar;
 	b_menuBar->Append(b_menuSettings, "设置");
 	b_frame->SetMenuBar(b_menuBar);
 }
 
 void cMain::OnCheckerButtonClicked(wxCommandEvent& evt) {
-	wxString result = mem.checkPlants(b_choice->GetCurrentSelection(), b_menuSettings->IsChecked(ID_CHANGESUN), b_menuSettings->IsChecked(ID_CHANGELEVEL));
+	wxString result = mem.checkPlants(b_choice->GetCurrentSelection(), b_menuSettings->IsChecked(ID_CHANGESUN), b_menuSettings->IsChecked(ID_CHANGELEVEL), b_menuSettings->IsChecked(ID_RESETPUFFSHROOM));
 	wxMessageBox(result, "检查结果");
 }
 

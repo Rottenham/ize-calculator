@@ -479,17 +479,6 @@ namespace IZE {
 		return puzzle;
 	}
 
-	// 禁用女仆秘籍
-	void Memory::disableMaid() {
-		/*	if (!FindGame())
-				if (!FindGame2())
-					return;
-
-			if (GameOn()) {
-				WriteMemory<int>(-7381399710890530610, { 0x6a9ec0, 0x454 });
-			}*/
-	}
-
 	// 查找游戏窗口打开进程句柄
 	bool Memory::FindGame() {
 		hwnd = FindWindowW(L"MainWindow", L"Plants vs. Zombies");
@@ -503,8 +492,6 @@ namespace IZE {
 		handle = OpenProcess(PROCESS_ALL_ACCESS, false, pid);
 		return handle != nullptr;
 	}
-
-
 
 	bool Memory::FindGame2() {
 		hwnd = FindWindowW(L"MainWindow", L"植物大战僵尸中文版");
@@ -737,7 +724,7 @@ namespace IZE {
 	}
 
 	// 珍珑检查器部分
-	wxString Memory::checkPlants(int theme, bool changeSun, bool changeLevel) {
+	wxString Memory::checkPlants(int theme, bool changeSun, bool changeLevel, bool resetPuffshroom) {
 		if (!FindGame())
 			if (!FindGame2()) {
 				return "找不到游戏";
@@ -815,6 +802,11 @@ namespace IZE {
 			if (changeLevel) {
 				setLevel(xrkNum);
 			}
+
+			// 小喷归位
+			if (resetPuffshroom) {
+				resetPuff();
+			}
 		}
 
 		CloseGame();
@@ -823,6 +815,44 @@ namespace IZE {
 		}
 		delete[] puzzle;
 		return result;
+	}
+
+	void Memory::resetPuff() {
+		if (!FindGame())
+			if (!FindGame2()) {
+				return;
+			}
+
+		// 读取游戏模式
+		auto gamemode = ReadMemory<int>({ 0x6a9ec0, 0x7f8 });
+		if (gamemode != 70) {
+			return;
+		}
+
+		// 读取游戏界面（2/3 - 在IZE内部）
+		auto gameui = ReadMemory<int>({ 0x6a9ec0, 0x7FC });
+		if (gameui != 3 && gameui != 2) {
+			return;
+		}
+
+		auto plants_offset = ReadMemory<unsigned int>({ 0x6a9ec0, 0x768, 0xac });
+		auto plants_count_max = ReadMemory<unsigned int>({ 0x6a9ec0, 0x768, 0xb0 });
+
+		for (size_t i = 0; i < plants_count_max; ++i) {
+			auto plant_dead = ReadMemory<bool>({ plants_offset + 0x141 + 0x14c * i });
+			auto plant_squished = ReadMemory<bool>({ plants_offset + 0x142 + 0x14c * i });
+			auto plant_type = ReadMemory<int>({ plants_offset + 0x24 + 0x14c * i });
+			auto plant_row = ReadMemory<int>({ plants_offset + 0x1c + 0x14c * i });
+			auto plant_col = ReadMemory<int>({ plants_offset + 0x28 + 0x14c * i });
+			auto plant_absc = ReadMemory<int>({ plants_offset + 0x8 + 0x14c * i });
+			auto plant_ord = ReadMemory<int>({ plants_offset + 0xc + 0x14c * i });
+			if (!plant_dead && !plant_squished && plant_type == XPG_8 && plant_row >= 0 && plant_row <= 4 && plant_col >= 0 && plant_col <= 4) {
+				int expected_absc = 40 + 80 * plant_col;
+				int expected_ord = 80 + 100 * plant_row;
+				if (plant_absc != expected_absc) WriteMemory<int>(expected_absc, { plants_offset + 0x8 + 0x14c * i });
+				if (plant_ord != expected_ord) WriteMemory<int>(expected_ord, { plants_offset + 0xc + 0x14c * i });
+			}
+		}
 	}
 
 	// 快捷布阵：读取当前阵型

@@ -27,10 +27,9 @@ namespace IZE {
 		std::string getBrief();
 		bool getQX();
 		int** readPlants(bool setRunInBackground, bool showExpect, int showScore, bool enableSpeed);
-		wxString checkPlants(int theme, bool changeSun, bool changeLevel);
+		wxString checkPlants(int theme, bool changeSun, bool changeLevel, bool resetPuffshroom);
 		wxString readPlantsToCode();
 		wxString embattleFromCode(wxString plant_code, bool checkCompliance);
-		void disableMaid();
 
 	private:
 		void resetValues(bool setRecord);
@@ -54,6 +53,7 @@ namespace IZE {
 		int getPlantTypeByCode(wxString plant_code);
 		void setSun(int xrkNum);
 		void setLevel(int xrkNum);
+		void resetPuff();
 
 		// 内存操作部分
 		void asm_code_inject();
