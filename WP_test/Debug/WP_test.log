@@ -1,0 +1,4 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(459,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (WP_test.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  memory.cpp
+C:\Users\Chenz\source\repos\WP_test\WP_test\memory.cpp(544): warning C4715: 'IZE::Memory::setFrameDuration': not all control paths return a value
+  WP_test.vcxproj -> C:\Users\Chenz\source\repos\WP_test\Debug\IZECalculator.exe
