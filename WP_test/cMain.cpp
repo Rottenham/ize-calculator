@@ -77,7 +77,6 @@ EVT_BUTTON(ID_EMBATTLE_BUTTON3, OnReadPuzzleButtonClicked)
 EVT_BUTTON(ID_EMBATTLE_BUTTON4, OnEmbattleClearButtonClicked)
 EVT_RADIOBUTTON(ID_SCORECALC_RBUTTON1, OnMaidlessButton)
 EVT_RADIOBUTTON(ID_SCORECALC_RBUTTON2, OnMaidButton)
-EVT_MENU(wxID_EXIT, OnExit)
 EVT_MENU(wxID_ABOUT, OnAbout)
 EVT_MENU(ID_DOC, OnDoc)
 EVT_MENU(ID_GAMESPEED, OnSpeed)
@@ -96,7 +95,7 @@ EVT_HOTKEY(HOTKEY_ID_1, OnHotKey1)
 EVT_THREAD(MYTHREAD_UPDATE, OnThreadUpdate)
 wxEND_EVENT_TABLE()
 
-cMain::cMain() : wxFrame(nullptr, wxID_ANY, "IZE血量计算器 v1.5.5", wxDefaultPosition, wxSize(348, 450), (wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) | wxWANTS_CHARS) {
+cMain::cMain() : wxFrame(nullptr, wxID_ANY, "IZE血量计算器 v1.5.6", wxDefaultPosition, wxSize(348, 450), (wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) | wxWANTS_CHARS) {
 	this->RegisterHotKey(HOTKEY_ID_1, (wxMOD_CONTROL), 0x44);
 	cellFont.SetPointSize(10);
 	cellFontBold = cellFont.Bold();
@@ -112,11 +111,11 @@ cMain::cMain() : wxFrame(nullptr, wxID_ANY, "IZE血量计算器 v1.5.5", wxDefau
 	a_menuView = new wxMenu;
 	a_menuView->AppendCheckItem(ID_SCORE_MAIDLESS, "显示花数（无女仆）", "开启/关闭新标准算分（无女仆）");
 	a_menuView->AppendCheckItem(ID_SCORE_MAID, "显示花数（有女仆）", "开启/关闭新标准算分（有女仆）");
-	a_menuView->AppendCheckItem(ID_EXPECT, "显示冲关目标", "仅供想要破纪录的玩家参考");
+	//a_menuView->AppendCheckItem(ID_EXPECT, "显示冲关目标", "仅供想要破纪录的玩家参考");
 	a_menuHelp = new wxMenu;
 	a_menuHelp->Append(ID_DOC, "使用说明", " ");
 	a_menuHelp->Append(wxID_ABOUT, "关于...", " ");
-	a_menuHelp->Append(wxID_EXIT, "退出", " ");
+	//a_menuHelp->Append(wxID_EXIT, "退出", " ");
 	a_menuOthers = new wxMenu;
 	a_menuOthers->Append(ID_CHECKER, "珍珑检查器", "检查植物数量是否正确");
 	a_menuOthers->Append(ID_RATE, "过率对比", "比较不同解法的期望花费");
@@ -183,7 +182,7 @@ void cMain::OnExit(wxCommandEvent& evt) {
 }
 
 void cMain::OnAbout(wxCommandEvent& evt) {
-	wxMessageBox("这是一个用于计算IZE单破血量的计算器。\n\n版本号: v1.5.5\n\n开发者: Crescendo\nbilibili: Crescebdo\n贴吧: Crescendo\n\n使用工具: Visual Studio 2019, wxWidgets 3.1.4",
+	wxMessageBox("这是一个用于计算IZE单破血量的计算器。\n\n版本号: v1.5.6\n\n开发者: Crescendo\nbilibili: Crescebdo\n贴吧: Crescendo\n\n使用工具: Visual Studio 2019, wxWidgets 3.1.4",
 		"关于IZE计算器", wxOK);
 }
 
@@ -596,7 +595,7 @@ void cMain::SetValues() {
 	else if (a_menuView->IsChecked(ID_SCORE_MAID)) {
 		scoreMode = 1;
 	}
-	int** plants = mem.readPlants(a_menuSettings->IsChecked(ID_BGRUN), a_menuView->IsChecked(ID_EXPECT), scoreMode, a_menuSettings->IsChecked(ID_GAMESPEED));
+	int** plants = mem.readPlants(a_menuSettings->IsChecked(ID_BGRUN), false, scoreMode, a_menuSettings->IsChecked(ID_GAMESPEED));
 	if (plants == nullptr) {
 		SetStatusText(wxT("尚未进入IZE"), 0);
 		resetStyle();
