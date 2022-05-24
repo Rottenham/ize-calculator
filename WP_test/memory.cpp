@@ -938,6 +938,16 @@ namespace IZE {
 			}
 		}
 
+		// 清除场上所有僵尸（可选）
+		auto zombie_count_max = ReadMemory<uint32_t>({ 0x6a9ec0, 0x768, 0x94 });
+		auto zombie_offset = ReadMemory<uintptr_t>({ 0x6a9ec0, 0x768, 0x90 });
+		for (size_t i = 0; i < zombie_count_max; i++) {
+			if (!ReadMemory<bool>({ zombie_offset + 0xec + i * 0x15c })) // not disappear
+			{
+				WriteMemory<int>(3, { zombie_offset + 0x28 + i * 0x15c });	// kill
+			}
+		}
+
 		// 重新布阵
 		int** puzzle = compilePlantCode(plant_code);
 		for (int i = 0; i < 5; i++) {
