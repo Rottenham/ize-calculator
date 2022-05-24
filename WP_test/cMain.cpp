@@ -95,7 +95,9 @@ EVT_HOTKEY(HOTKEY_ID_1, OnHotKey1)
 EVT_THREAD(MYTHREAD_UPDATE, OnThreadUpdate)
 wxEND_EVENT_TABLE()
 
-cMain::cMain() : wxFrame(nullptr, wxID_ANY, "IZE血量计算器 v1.5.6", wxDefaultPosition, wxSize(348, 450), (wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) | wxWANTS_CHARS) {
+string curr_version = "1.5.7";
+
+cMain::cMain() : wxFrame(nullptr, wxID_ANY, "IZE血量计算器 v" + curr_version, wxDefaultPosition, wxSize(348, 450), (wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) | wxWANTS_CHARS) {
 	this->RegisterHotKey(HOTKEY_ID_1, (wxMOD_CONTROL), 0x44);
 	cellFont.SetPointSize(10);
 	cellFontBold = cellFont.Bold();
@@ -182,7 +184,7 @@ void cMain::OnExit(wxCommandEvent& evt) {
 }
 
 void cMain::OnAbout(wxCommandEvent& evt) {
-	wxMessageBox("这是一个用于计算IZE单破血量的计算器。\n\n版本号: v1.5.6\n\n开发者: Crescendo\nbilibili: Crescebdo\n贴吧: Crescendo\n\n使用工具: Visual Studio 2019, wxWidgets 3.1.4",
+	wxMessageBox("这是一个用于计算IZE单破血量的计算器。\n\n版本号: v" + curr_version + "\n\n开发者: Crescendo\nbilibili: Crescebdo\n贴吧: Crescendo\n\n使用工具: Visual Studio 2019, wxWidgets 3.1.4",
 		"关于IZE计算器", wxOK);
 }
 
@@ -477,7 +479,8 @@ void cMain::OnEmbattle(wxCommandEvent& evt) {
 	wxStaticText* e_text1 = new wxStaticText(e_panel, wxID_ANY, "输入布阵代码：", wxPoint(10, 13), wxSize(50, 20));
 	e_text1->SetFont(cellFont);
 	e_input = new wxTextCtrl(e_panel, wxID_ANY, "", wxPoint(10, 43), wxSize(180, 120), wxTE_MULTILINE);
-	e_input->SetFont(cellFont3);
+	wxFont monospace_font(wxFontInfo(13).FaceName("Consolas"));
+	e_input->SetFont(monospace_font);
 	wxButton* e_button1 = new wxButton(e_panel, ID_EMBATTLE_BUTTON1, "布阵并合规", wxPoint(210, 13), wxSize(90, 27));
 	e_button1->SetFont(cellFont);
 	wxButton* e_button2 = new wxButton(e_panel, ID_EMBATTLE_BUTTON2, "仅布阵", wxPoint(210, 53), wxSize(90, 27));
