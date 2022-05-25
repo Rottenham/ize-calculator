@@ -36,8 +36,6 @@
 
 这是一个用于计算IZE单破血量的计算器。
 
-版本号: v1.5.5
-
 开发者: Crescendo
 
 bilibili: Crescebdo
