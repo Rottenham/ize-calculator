@@ -77,6 +77,7 @@ public:
 	// ¿ì½Ý²¼Õó
 	wxFrame* e_frame = nullptr;
 	wxTextCtrl* e_input = nullptr;
+	wxMenu* e_menuSettings = nullptr;
 	wxMenu* e_menuHelp = nullptr;
 	void OnEmbattle(wxCommandEvent& evt);
 	void OnEmbattleButtonClicked(wxCommandEvent& evt);
@@ -84,6 +85,8 @@ public:
 	void OnEmbattleOnlyButtonClicked(wxCommandEvent& evt);
 	void OnReadPuzzleButtonClicked(wxCommandEvent& evt);
 	void OnEmbattleClearButtonClicked(wxCommandEvent& evt);
+	void OnEmbattleIndex(wxCommandEvent& evt);
+	bool exportIndexChecked = false;
 
 	wxDECLARE_EVENT_TABLE();
 

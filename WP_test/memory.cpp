@@ -404,22 +404,170 @@ namespace IZE {
 		return -1;
 	}
 
-	// 将阵型转换为代码
-	wxString Memory::toCode(int** plants) {
-		wxString result = "";
-		for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < 5; j++) {
-				result += getCode(plants[i][j]);
-			}
-			if (i != 4) {
-				result += "\n";
-			}
+	std::pair<int, int> indexOfPlantInPuzzle(int** plants, int plant) {
+		for (int i = 0; i < 5; i++)
+			for (int j = 0; j < 5; j++)
+				if (plants[i][j] == plant) return std::pair<int, int>(i, j);
+		return std::pair<int, int>(-1, -1);
+	}
+
+	void compareIndex(int round[][5], int** index, std::vector<std::pair<int, int>> plants) {
+		if (plants.size() < 2) return;
+
+		// sort
+		for (int i = 0; i < plants.size() - 1; i++)
+			for (int j = 0; j < plants.size() - 1 - i; j++)
+				if (index[plants.at(j).first][plants.at(j).second] > index[plants.at(j + 1).first][plants.at(j + 1).second]) {
+					std::swap(plants[j], plants[j + 1]);
+				}
+
+		for (int i = 1; i < plants.size(); i++) {
+			round[plants.at(i).first][plants.at(i).second] = i + 1;
 		}
-		return result;
+	}
+
+	bool checkPotatoMagnet(int r1, int c1, int r2, int c2) {
+		if (r1 == r2 + 2 && c1 == c2 - 2) return true;
+		if (r1 == r2 + 1 && c1 == c2 - 3) return true;
+		if (r1 == r2 && c1 == c2 - 3) return true;
+		if (r1 == r2 - 1 && c1 == c2 - 3) return true;
+		if (r1 == r2 - 2 && c1 == c2 - 2) return true;
+		return false;
+	}
+
+	bool checkPotato(int** plants, int r, int c) {
+		if (c > 4) return false;
+		if (plants[r][c] != TDDL_4) return false;
+		if (c > 0 && plants[r][c - 1] == WG_17) return true;
+		if (c < 4 && plants[r][c + 1] == WG_17) return true;
+		return false;
+	}
+
+	bool checkSquash(int** plants, int r, int c) {
+		if (c > 4) return false;
+		if (plants[r][c] != WG_17) return false;
+		if (c > 0 && plants[r][c - 1] == TDDL_4) return true;
+		if (c < 4 && plants[r][c + 1] == TDDL_4) return true;
+		return false;
+	}
+
+	void rollback(int** plants, int round[][5], int r, int c) {
+		int start = c;
+		int end = c;
+		while (start > 0 && (checkPotato(plants, r, start - 1) || checkSquash(plants, r, start - 1))) start--;
+		while (end < 4 && (checkPotato(plants, r, end + 1) || checkSquash(plants, r, end + 1))) end++;
+		for (int i = start; i <= end; i++)
+			if (i >= 0 && i < 5) round[r][i]++;
+	}
+
+	// 将阵型转换为代码
+	wxString Memory::toCode(int** plants, int** index) {
+		wxString result = "";
+		if (index == nullptr) {
+			for (int i = 0; i < 5; i++) {
+				for (int j = 0; j < 5; j++) {
+					result += getCode(plants[i][j]);
+				}
+				if (i != 4) {
+					result += "\n";
+				}
+			}
+			return result;
+		}
+		else {
+			int round[5][5];
+			for (int i = 0; i < 5; i++)
+				for (int j = 0; j < 5; j++)
+					round[i][j] = 1;
+
+			// 三线火树
+			auto sfss_pos = indexOfPlantInPuzzle(plants, SFSS_18);
+			auto hjsz_pos = indexOfPlantInPuzzle(plants, HJSZ_22);
+			if (sfss_pos.first != -1 && hjsz_pos.first != -1 && abs(sfss_pos.first - hjsz_pos.first) == 1 && sfss_pos.second == hjsz_pos.second) {
+				if (index[sfss_pos.first][sfss_pos.second] > index[hjsz_pos.first][hjsz_pos.second])
+					round[sfss_pos.first][sfss_pos.second]++;
+				else
+					round[hjsz_pos.first][hjsz_pos.second]++;
+			}
+
+			// 磁铁土豆、大嘴土豆
+			std::vector<std::vector<int>> relation;
+			auto clg_pos = indexOfPlantInPuzzle(plants, CLG_31);
+			for (int i = 0; i < 5; i++)
+				for (int j = 0; j < 5; j++)
+					if (plants[i][j] == TDDL_4 && checkPotatoMagnet(clg_pos.first, clg_pos.second, i, j)) {
+						int diff = index[clg_pos.first][clg_pos.second] > index[i][j] ? 1 : -1;
+						relation.push_back({ clg_pos.first, clg_pos.second, i, j, diff });
+						break;
+					}
+			for (int i = 0; i < 5; i++)
+				for (int j = 0; j < 4; j++)
+					if (plants[i][j] == DZH_6 && plants[i][j + 1] == TDDL_4) {
+						int diff = index[i][j] > index[i][j + 1] ? 1 : -1;
+						relation.push_back({ i, j, i, j + 1, diff });
+					}
+
+			// 窝瓜土豆
+			for (int i = 0; i < 5; i++) {
+				std::vector<std::pair<int, int>> buffer;
+				for (int j = 0; j < 6; j++) {
+					if (checkPotato(plants, i, j) || checkSquash(plants, i, j)) {
+						buffer.push_back(std::pair<int, int>(i, j));
+					}
+					else {
+						if (!buffer.empty()) {
+							compareIndex(round, index, buffer);
+							buffer.clear();
+						}
+					}
+				}
+			}
+
+			// 处理之前的土豆关系
+			for (auto lst : relation) {
+				round[lst[0]][lst[1]] = round[lst[2]][lst[3]] + lst[4];
+				if (round[lst[0]][lst[1]] == 0) {
+					round[lst[0]][lst[1]]++;
+					rollback(plants, round, lst[2], lst[3]);
+				}
+			}
+
+			// 输出
+			for (int i = 0; i < 5; i++) {
+				for (int j = 0; j < 5; j++) {
+					result += getCode(plants[i][j]);
+					for (int k = 0; k < round[i][j] - 1; k++)
+						result += "+";
+				}
+				if (i != 4) {
+					result += "\n";
+				}
+			}
+			return result;
+		}
+	}
+
+	// 将待布置的植物插入至vector中合适的位置
+	// 先检查vector大小，若不够先扩容
+	void Memory::update(std::vector<int**>& result, wxString chr, int row, int col, int round) {
+		while (result.size() < round) {
+			int** puzzle = new int* [5];
+			for (int i = 0; i < 5; i++) {
+				puzzle[i] = new int[5];
+			}
+			for (int i = 0; i < 5; i++) {
+				for (int j = 0; j < 5; j++) {
+					puzzle[i][j] = -1;
+				}
+			}
+			result.push_back(puzzle);
+		}
+		result.at(round - 1)[row][col] = getPlantTypeByCode(chr);
 	}
 
 	// 读入一段代码并转换
-	int** Memory::compilePlantCode(wxString input) {
+	std::vector<int**> Memory::compilePlantCode(wxString input) {
+		std::vector<int**> result;
 		int** puzzle = new int* [5];
 		for (int i = 0; i < 5; i++) {
 			puzzle[i] = new int[5];
@@ -456,27 +604,27 @@ namespace IZE {
 					}
 				}
 			}
-			int currentRow[5];
-			for (int i = 0; i < 5; i++) {
-				currentRow[i] = -1;
-			}
-			for (size_t col = 0; col < 5 && col < line.size(); col++) {
-				wxString currentChar = line.substr(col, 1);
-				if (currentChar == "*") {
-					break;
-				}
-				else {
-					currentRow[col] = getPlantTypeByCode(currentChar);
-				}
-			}
-			for (int i = 0; i < repeat; i++) {
-				for (int col = 0; col < 5; col++) {
-					puzzle[row][col] = currentRow[col];
+			for (int r = 0; r < repeat; r++) {
+				size_t col = 0;
+				for (int i = 0; col < 5 && i < line.size(); i++) {
+					wxString currentChar = line.substr(i, 1);
+					if (currentChar == "*") {
+						break;
+					}
+					else {
+						int round = 1;
+						while (i + 1 < line.size() && line.substr(i + 1, 1) == "+") {
+							i++;
+							round++;
+						}
+						update(result, currentChar, row, col, round);
+						col++;
+					}
 				}
 				row++;
 			}
 		}
-		return puzzle;
+		return result;
 	}
 
 	// 查找游戏窗口打开进程句柄
@@ -855,8 +1003,47 @@ namespace IZE {
 		}
 	}
 
+	void Memory::resetBrains() {
+		if (!FindGame())
+			if (!FindGame2()) {
+				return;
+			}
+
+		// 读取游戏模式
+		auto gamemode = ReadMemory<int>({ 0x6a9ec0, 0x7f8 });
+		if (gamemode != 70) {
+			return;
+		}
+
+		// 读取游戏界面（2/3 - 在IZE内部）
+		auto gameui = ReadMemory<int>({ 0x6a9ec0, 0x7FC });
+		if (gameui != 3 && gameui != 2) {
+			return;
+		}
+
+		// 清空大脑
+		asm_init();
+		auto grid_item_count_max = ReadMemory<uint32_t>({ 0x6a9ec0, 0x768, 0x120 });
+		auto grid_item_offset = ReadMemory<uintptr_t>({ 0x6a9ec0, 0x768, 0x11c });
+		for (size_t i = 0; i < grid_item_count_max; i++) {
+			auto grid_item_disappeared = ReadMemory<bool>({ grid_item_offset + 0x20 + 0xec * i });
+			auto grid_item_type = ReadMemory<int>({ grid_item_offset + 0x8 + 0xec * i });
+			if (!grid_item_disappeared && grid_item_type == 12) {
+				int addr = grid_item_offset + 0xec * i;
+				asm_mov_exx(Reg::ESI, addr);
+				asm_call(0x0044d000);
+			}
+		}
+		asm_ret();
+		asm_code_inject();
+
+		// 
+
+	}
+
+
 	// 快捷布阵：读取当前阵型
-	wxString Memory::readPlantsToCode() {
+	wxString Memory::readPlantsToCode(bool readIndex) {
 		if (!FindGame())
 			if (!FindGame2()) {
 				return "读取失败：找不到游戏";
@@ -876,11 +1063,16 @@ namespace IZE {
 
 		// 读取场上植物信息
 		int** puzzle = new int* [5];
-		for (int i = 0; i < 5; i++)
+		int** index = new int* [5];
+		for (int i = 0; i < 5; i++) {
 			puzzle[i] = new int[5];
+			index[i] = new int[5];
+		}
 		for (int i = 0; i < 5; i++)
-			for (int j = 0; j < 5; j++)
+			for (int j = 0; j < 5; j++) {
 				puzzle[i][j] = -1;
+				index[i][j] = -1;
+			}
 		auto plants_offset = ReadMemory<unsigned int>({ 0x6a9ec0, 0x768, 0xac });
 		auto plants_count_max = ReadMemory<unsigned int>({ 0x6a9ec0, 0x768, 0xb0 });
 		for (size_t i = 0; i < plants_count_max; ++i) {
@@ -892,16 +1084,24 @@ namespace IZE {
 			if (!plant_dead && !plant_squished) {
 				if (plant_row >= 0 && plant_row <= 4 && plant_col >= 0 && plant_col <= 4) {
 					puzzle[plant_row][plant_col] = plant_type;
+					index[plant_row][plant_col] = i;
 				}
 			}
 		}
 
-		wxString result = toCode(puzzle);
+		wxString result = readIndex ? toCode(puzzle, index) : toCode(puzzle);
 		for (int i = 0; i < 5; i++) {
 			delete[] puzzle[i];
+			delete[] index[i];
 		}
 		delete[] puzzle;
+		delete[] index;
 		return "成功：" + result;
+	}
+
+	void Memory::clearPlantStack() {
+		WriteMemory<unsigned int>(0, { 0x6a9ec0, 0x768, 0xb0 });
+		WriteMemory<unsigned int>(0, { 0x6a9ec0, 0x768, 0xb8 });
 	}
 
 	// 快捷布阵
@@ -949,11 +1149,20 @@ namespace IZE {
 		}
 
 		// 重新布阵
-		int** puzzle = compilePlantCode(plant_code);
-		for (int i = 0; i < 5; i++) {
-			for (int j = 0; j < 5; j++) {
-				if (puzzle[i][j] != -1) {
-					asm_iz_plant(i, j, puzzle[i][j]);
+		std::vector<int**> puzzle_list = compilePlantCode(plant_code);
+		if (puzzle_list.size() > 1) {
+			clearPlantStack();
+		}
+		int xrkNum = 0;
+		int dxgNum = 0;
+		for (int** puzzle : puzzle_list) {
+			xrkNum += countPlant(puzzle, XRK_1);
+			dxgNum += countPlant(puzzle, DXG_13);
+			for (int i = 0; i < 5; i++) {
+				for (int j = 0; j < 5; j++) {
+					if (puzzle[i][j] != -1) {
+						asm_iz_plant(i, j, puzzle[i][j]);
+					}
 				}
 			}
 		}
@@ -961,20 +1170,23 @@ namespace IZE {
 		asm_code_inject();
 
 		// 调整关数与阳光，小喷归位
+		// 重置大脑
 		if (checkCompliance) {
-			int xrkNum = countPlant(puzzle, XRK_1);
-			if (countPlant(puzzle, DXG_13) > 0) {
+			if (dxgNum > 0) {
 				xrkNum -= 5;
 			}
 			setSun(xrkNum);
 			setLevel(xrkNum);
 			resetPuff();
+			resetBrains();
 		}
 
-		for (int i = 0; i < 5; i++) {
-			delete[] puzzle[i];
+		for (int** puzzle : puzzle_list) {
+			for (int i = 0; i < 5; i++) {
+				delete[] puzzle[i];
+			}
+			delete[] puzzle;
 		}
-		delete[] puzzle;
 		return "成功";
 	}
 
