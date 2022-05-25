@@ -28,8 +28,11 @@ namespace IZE {
 		bool getQX();
 		int** readPlants(bool setRunInBackground, bool showExpect, int showScore, bool enableSpeed);
 		wxString checkPlants(int theme, bool changeSun, bool changeLevel, bool resetPuffshroom);
-		wxString readPlantsToCode();
+		wxString readPlantsToCode(bool readIndex);
 		wxString embattleFromCode(wxString plant_code, bool checkCompliance);
+		void update(std::vector<int**>& result, wxString chr, int row, int col, int round);
+		void clearPlantStack();
+		void resetBrains();
 
 	private:
 		void resetValues(bool setRecord);
@@ -47,9 +50,9 @@ namespace IZE {
 		int getIndex(int plant_type);
 		wxString checkEach(int** plants, int* counter, int* goal, bool isDX, bool isBType);
 		wxString getCode(int plant_type);
-		wxString toCode(int** plants);
+		wxString toCode(int** plants, int** index = nullptr);
 		wxString checkTheme(int** plants, int* counter, int theme);
-		int** compilePlantCode(wxString input);
+		std::vector<int**> compilePlantCode(wxString input);
 		int getPlantTypeByCode(wxString plant_code);
 		void setSun(int xrkNum);
 		void setLevel(int xrkNum);

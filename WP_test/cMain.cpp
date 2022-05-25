@@ -62,6 +62,7 @@ enum {
 	ID_EMBATTLE_BUTTON2,
 	ID_EMBATTLE_BUTTON3,
 	ID_EMBATTLE_BUTTON4,
+	ID_EMBATTLE_INDEX,
 	ID_EMBATTLE_DOC,
 	MYTHREAD_UPDATE = wxID_HIGHEST + 1
 };
@@ -88,6 +89,7 @@ EVT_MENU(ID_SCORE_MAIDLESS, OnScoreMaidless)
 EVT_MENU(ID_SCORECALC, OnScoreCalculator)
 EVT_MENU(ID_EMBATTLE, OnEmbattle)
 EVT_MENU(ID_EMBATTLE_DOC, OnEmbattleDoc)
+EVT_MENU(ID_EMBATTLE_INDEX, OnEmbattleIndex)
 EVT_GRID_RANGE_SELECT(OnSelect)
 EVT_GRID_CELL_LEFT_CLICK(OnCellLeftClick)
 EVT_CLOSE(OnClose)
@@ -95,7 +97,7 @@ EVT_HOTKEY(HOTKEY_ID_1, OnHotKey1)
 EVT_THREAD(MYTHREAD_UPDATE, OnThreadUpdate)
 wxEND_EVENT_TABLE()
 
-string curr_version = "1.5.7";
+string curr_version = "1.5.8";
 
 cMain::cMain() : wxFrame(nullptr, wxID_ANY, "IZE血量计算器 v" + curr_version, wxDefaultPosition, wxSize(348, 450), (wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) | wxWANTS_CHARS) {
 	this->RegisterHotKey(HOTKEY_ID_1, (wxMOD_CONTROL), 0x44);
@@ -490,9 +492,13 @@ void cMain::OnEmbattle(wxCommandEvent& evt) {
 	wxButton* e_button4 = new wxButton(e_panel, ID_EMBATTLE_BUTTON4, "清空", wxPoint(210, 133), wxSize(90, 27));
 	e_button4->SetFont(cellFont);
 	e_frame->CreateStatusBar(1, wxSB_FLAT);
+	e_menuSettings = new wxMenu;
+	e_menuSettings->AppendCheckItem(ID_EMBATTLE_INDEX, "导出编号", "是否导出植物编号（也称“栈位”）大小关系");
+	e_menuSettings->Check(ID_EMBATTLE_INDEX, exportIndexChecked);
 	e_menuHelp = new wxMenu;
 	e_menuHelp->Append(ID_EMBATTLE_DOC, "使用说明");
 	wxMenuBar* e_menuBar = new wxMenuBar;
+	e_menuBar->Append(e_menuSettings, "设置");
 	e_menuBar->Append(e_menuHelp, "帮助");
 	e_frame->SetMenuBar(e_menuBar);
 }
@@ -518,7 +524,7 @@ void cMain::OnEmbattleOnlyButtonClicked(wxCommandEvent& evt) {
 }
 
 void cMain::OnReadPuzzleButtonClicked(wxCommandEvent& evt) {
-	wxString result = mem.readPlantsToCode();
+	wxString result = mem.readPlantsToCode(e_menuSettings->IsChecked(ID_EMBATTLE_INDEX));
 	int match = result.rfind("成功：", 0);
 	if (match != 0) {
 		e_frame->SetStatusText(result, 0);
@@ -553,8 +559,16 @@ void cMain::OnEmbattleDoc(wxCommandEvent& evt) {
 
 例如：【2b22l*5】会布出五行均为双冰双双裂的阵图。
 
+可在某植物后添加"+"号（可添加多个），代表延迟一轮（或多轮）种植。每轮种植的植物的编号（也称作"栈位"）严格高于前一轮。
+
+例如：【wt+】表示窝瓜于第一轮种植，土豆于第二轮种植；土豆编号必定高于窝瓜。
+
 每行超出5列，以及超出5行的部分不会被读入，也不会报错。)";
 	wxMessageBox(r, "使用说明");
+}
+
+void cMain::OnEmbattleIndex(wxCommandEvent& evt) {
+	exportIndexChecked = e_menuSettings->IsChecked(ID_EMBATTLE_INDEX);
 }
 
 // 禁止选择
