@@ -493,13 +493,15 @@ namespace IZE {
 			// 磁铁土豆、大嘴土豆
 			std::vector<std::vector<int>> relation;
 			auto clg_pos = indexOfPlantInPuzzle(plants, CLG_31);
-			for (int i = 0; i < 5; i++)
-				for (int j = 0; j < 5; j++)
-					if (plants[i][j] == TDDL_4 && checkPotatoMagnet(clg_pos.first, clg_pos.second, i, j)) {
-						int diff = index[clg_pos.first][clg_pos.second] > index[i][j] ? 1 : -1;
-						relation.push_back({ clg_pos.first, clg_pos.second, i, j, diff });
-						break;
-					}
+			if (clg_pos.first != -1) {
+				for (int i = 0; i < 5; i++)
+					for (int j = 0; j < 5; j++)
+						if (plants[i][j] == TDDL_4 && checkPotatoMagnet(clg_pos.first, clg_pos.second, i, j)) {
+							int diff = index[clg_pos.first][clg_pos.second] > index[i][j] ? 1 : -1;
+							relation.push_back({ clg_pos.first, clg_pos.second, i, j, diff });
+							break;
+						}
+			}
 			for (int i = 0; i < 5; i++)
 				for (int j = 0; j < 4; j++)
 					if (plants[i][j] == DZH_6 && plants[i][j + 1] == TDDL_4) {
@@ -510,12 +512,10 @@ namespace IZE {
 			// 窝瓜土豆
 			for (int i = 0; i < 5; i++) {
 				std::vector<std::pair<int, int>> buffer;
-				for (int j = 0; j < 6; j++) {
+				for (int j = 0; j < 5; j++) {
 					if (checkPotato(plants, i, j) || checkSquash(plants, i, j)) {
 						buffer.push_back(std::pair<int, int>(i, j));
-					}
-					else {
-						if (!buffer.empty()) {
+						if (j == 4 || plants[i][j] == plants[i][j + 1] || (!checkPotato(plants, i, j + 1) && !checkSquash(plants, i, j + 1))) {
 							compareIndex(round, index, buffer);
 							buffer.clear();
 						}
@@ -1036,9 +1036,6 @@ namespace IZE {
 		}
 		asm_ret();
 		asm_code_inject();
-
-		// 
-
 	}
 
 
@@ -1170,7 +1167,6 @@ namespace IZE {
 		asm_code_inject();
 
 		// 调整关数与阳光，小喷归位
-		// 重置大脑
 		if (checkCompliance) {
 			if (dxgNum > 0) {
 				xrkNum -= 5;
@@ -1178,7 +1174,6 @@ namespace IZE {
 			setSun(xrkNum);
 			setLevel(xrkNum);
 			resetPuff();
-			resetBrains();
 		}
 
 		for (int** puzzle : puzzle_list) {
