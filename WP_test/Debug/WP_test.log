@@ -1,10 +1,4 @@
 ﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(459,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (WP_test.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  memory.cpp
-C:\Users\Chenz\source\repos\WP_test\WP_test\memory.cpp(418,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Chenz\source\repos\WP_test\WP_test\memory.cpp(419,22): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Chenz\source\repos\WP_test\WP_test\memory.cpp(424,21): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Chenz\source\repos\WP_test\WP_test\memory.cpp(553,24): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Chenz\source\repos\WP_test\WP_test\memory.cpp(609,34): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Chenz\source\repos\WP_test\WP_test\memory.cpp(616,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\Chenz\source\repos\WP_test\WP_test\memory.cpp(692): warning C4715: 'IZE::Memory::setFrameDuration': not all control paths return a value
+  LINK : C:\Users\Chenz\source\repos\WP_test\Debug\IZECalculator.exe not found or not built by the last incremental link; performing full link
+Debug\memory.obj : warning LNK4042: object specified more than once; extras ignored
   WP_test.vcxproj -> C:\Users\Chenz\source\repos\WP_test\Debug\IZECalculator.exe
