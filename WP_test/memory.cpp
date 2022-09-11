@@ -52,7 +52,7 @@ namespace IZE {
 	// 获得帧时长
 	int Memory::GetFrameDuration() {
 		int time_ms = 10;
-		if (!GameOn())
+		if (!GameOn() || !(FindGame() || FindGame()))
 			return time_ms;
 		time_ms = ReadMemory<int>({ 0x6a9ec0, 0x454 });
 		return time_ms;
@@ -80,6 +80,8 @@ namespace IZE {
 
 	// 检查当前主题是否为倾斜 - 需要8杨桃，9地刺， 剩下均为花/小喷且总数为8，小喷至少一个
 	bool Memory::checkQX(int** plants) {
+		if (!FindGame() && !FindGame2()) return false;
+		if (!GameOn()) return false;
 		if (countPlant(plants, YT_29) == 8 && countPlant(plants, DC_21) == 9 &&
 			countPlant(plants, XRK_1) + countPlant(plants, XPG_8) == 8 && countPlant(plants, XPG_8) >= 1) {
 			return true;
@@ -89,6 +91,8 @@ namespace IZE {
 
 	// 检查当前主题是否为胆小 - 需要12胆小，剩下均为花/小喷且总数为13，且花数在6~12之间
 	bool Memory::checkDX(int** plants) {
+		if (!FindGame() && !FindGame2()) return false;
+		if (!GameOn()) return false;
 		if (countPlant(plants, DXG_13) == 12 && countPlant(plants, XRK_1) + countPlant(plants, XPG_8) == 13 &&
 			countPlant(plants, XRK_1) >= 6 && countPlant(plants, XRK_1) <= 12) {
 			return true;
@@ -98,6 +102,8 @@ namespace IZE {
 
 	// 检查当前主题是否为输出 - 需要9冰豆，4双发，4裂荚，剩下均为花/小喷且总数为8，小喷至少1个
 	bool Memory::checkSC(int** plants) {
+		if (!FindGame() && !FindGame2()) return false;
+		if (!GameOn()) return false;
 		if (countPlant(plants, HBSS_5) == 9 && countPlant(plants, XRK_1) + countPlant(plants, XPG_8) == 8 &&
 			countPlant(plants, SCSS_7) == 4 && countPlant(plants, LJSS_28) == 4 && countPlant(plants, XPG_8) >= 1) {
 			return true;
@@ -107,6 +113,8 @@ namespace IZE {
 
 	// 检查当前主题是否为穿刺 - 需要9大喷，8磁铁，剩下均为花/小喷且总数为8，小喷至少1个
 	bool Memory::checkCC(int** plants) {
+		if (!FindGame() && !FindGame2()) return false;
+		if (!GameOn()) return false;
 		if (countPlant(plants, DPG_10) == 9 && countPlant(plants, XRK_1) + countPlant(plants, XPG_8) == 8 &&
 			countPlant(plants, CLG_31) == 8 && countPlant(plants, XPG_8) >= 1) {
 			return true;
@@ -682,13 +690,10 @@ namespace IZE {
 		if (!FindGame())
 			if (!FindGame2())
 				return false;
+		if (!GameOn()) return false;
 
-		if (GameOn()) {
-			WriteMemory<int>(time_ms, { 0x6a9ec0, 0x454 });
-		}
-		else {
-			return false;
-		}
+		WriteMemory<int>(time_ms, { 0x6a9ec0, 0x454 });
+		return true;
 	}
 
 	void Memory::resetFrameDuration() {
@@ -839,6 +844,8 @@ namespace IZE {
 	}
 
 	void Memory::setSun(int xrkNum) {
+		if (!FindGame() && !FindGame2()) return;
+		if (!GameOn()) return;
 		if (xrkNum == 8) {
 			WriteMemory<int>(150, { 0x6a9ec0, 0x768, 0x5560 });
 		}
@@ -851,6 +858,8 @@ namespace IZE {
 	}
 
 	void Memory::setLevel(int xrkNum) {
+		if (!FindGame() && !FindGame2()) return;
+		if (!GameOn()) return;
 		if (xrkNum == 8) {
 			WriteMemory<int>(0, { 0x6a9ec0, 0x768, 0x160, 0x6c });
 		}
@@ -970,6 +979,7 @@ namespace IZE {
 			if (!FindGame2()) {
 				return;
 			}
+		if (!GameOn()) return;
 
 		// 读取游戏模式
 		auto gamemode = ReadMemory<int>({ 0x6a9ec0, 0x7f8 });
@@ -1008,6 +1018,7 @@ namespace IZE {
 			if (!FindGame2()) {
 				return;
 			}
+		if (!GameOn()) return;
 
 		// 读取游戏模式
 		auto gamemode = ReadMemory<int>({ 0x6a9ec0, 0x7f8 });
@@ -1045,6 +1056,7 @@ namespace IZE {
 			if (!FindGame2()) {
 				return "读取失败：找不到游戏";
 			}
+		if (!GameOn()) return"读取失败：找不到游戏";
 
 		// 读取游戏模式
 		auto gamemode = ReadMemory<int>({ 0x6a9ec0, 0x7f8 });
@@ -1097,6 +1109,11 @@ namespace IZE {
 	}
 
 	void Memory::clearPlantStack() {
+		if (!FindGame())
+			if (!FindGame2()) {
+				return;
+			}
+		if (!GameOn()) return;
 		WriteMemory<unsigned int>(0, { 0x6a9ec0, 0x768, 0xb0 });
 		WriteMemory<unsigned int>(0, { 0x6a9ec0, 0x768, 0xb8 });
 	}
@@ -1107,6 +1124,7 @@ namespace IZE {
 			if (!FindGame2()) {
 				return "布阵失败：找不到游戏";
 			}
+		if (!GameOn()) return "布阵失败：找不到游戏";
 
 		// 读取游戏模式
 		auto gamemode = ReadMemory<int>({ 0x6a9ec0, 0x7f8 });

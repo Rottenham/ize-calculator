@@ -115,11 +115,9 @@ cMain::cMain() : wxFrame(nullptr, wxID_ANY, "IZE血量计算器 v" + curr_versio
 	a_menuView = new wxMenu;
 	a_menuView->AppendCheckItem(ID_SCORE_MAIDLESS, "显示花数（无女仆）", "开启/关闭新标准算分（无女仆）");
 	a_menuView->AppendCheckItem(ID_SCORE_MAID, "显示花数（有女仆）", "开启/关闭新标准算分（有女仆）");
-	//a_menuView->AppendCheckItem(ID_EXPECT, "显示冲关目标", "仅供想要破纪录的玩家参考");
 	a_menuHelp = new wxMenu;
 	a_menuHelp->Append(ID_DOC, "使用说明", " ");
 	a_menuHelp->Append(wxID_ABOUT, "关于...", " ");
-	//a_menuHelp->Append(wxID_EXIT, "退出", " ");
 	a_menuOthers = new wxMenu;
 	a_menuOthers->Append(ID_CHECKER, "珍珑检查器", "检查植物数量是否正确");
 	a_menuOthers->Append(ID_RATE, "过率对比", "比较不同解法的期望花费");
