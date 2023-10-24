@@ -563,11 +563,6 @@ struct Row {
 			}
 		}
 
-		if (mode == 3) {
-			fumeBite[0] = fumeBite[0];
-			cout << "hello" << endl;
-		}
-
 		for (int i = 0; i <= biteLmt; i++) {
 			double biteDPS = bite[i] + fumeBite[i];
 			if (biteSlowed[i]) {
