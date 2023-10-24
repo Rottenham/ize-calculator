@@ -1,6 +1,7 @@
 #include <sstream>
 #include <vector>
 #include <set>
+#include <iostream>
 #include "pvzstruct.h"
 
 using namespace std;
@@ -516,6 +517,11 @@ struct Row {
 		fixJG();
 	}
 
+	// brain A B C D E
+	// bite: from 0 to 5, corresponding to eating brain / A / B / C / D / E
+	// walk: from 0 to 5, corresponding to after eating A / B / C / D / E, and walk[5] is 
+	// the small interval from zombie placement to eating E
+
 	int compute() {
 		convert();
 		addPlants();
@@ -555,6 +561,11 @@ struct Row {
 					fumeBite[biteLmt] *= 1.25;
 				}
 			}
+		}
+
+		if (mode == 3) {
+			fumeBite[0] = fumeBite[0];
+			cout << "hello" << endl;
 		}
 
 		for (int i = 0; i <= biteLmt; i++) {
@@ -604,6 +615,16 @@ struct Row {
 					else {
 						walkDPS *= 1.875;
 					}
+				}
+			}
+			else if (HBfix.find(i + 1) != HBfix.end()) {
+				// 考虑橄榄减速滞留的问题
+				// 例如 单发 地刺 冰豆, 橄榄在地刺上会被多扎3下 （总DPS*2）
+				if (!walkFire[i] 
+					&& mode == 3
+					&& i + 1 <= biteLmt
+					&& bite[i + 1] + fumeBite[i + 1] == 0) {
+					walkDPS *= 2;
 				}
 			}
 			walkDPS *= getButterRate(walkButter[i]);

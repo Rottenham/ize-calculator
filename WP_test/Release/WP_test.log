@@ -1,0 +1,86 @@
+﻿  cApp.cpp
+  cMain.cpp
+C:\SDKs\WX314\include\wx\wxcrt.h(213,14): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(215,14): error C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(218,14): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(220,14): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(223,14): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(225,14): error C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(227,14): error C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(229,14): error C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(232,14): error C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(234,14): error C4996: 'wcscpy': This function or variable may be unsafe. Consider using wcscpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(238,14): error C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(240,14): error C4996: 'wcsncpy': This function or variable may be unsafe. Consider using wcsncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(243,14): error C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(245,14): error C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(248,14): error C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(250,14): error C4996: 'wcsncpy': This function or variable may be unsafe. Consider using wcsncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(252,14): error C4996: 'wcsncpy': This function or variable may be unsafe. Consider using wcsncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(254,14): error C4996: 'wcsncpy': This function or variable may be unsafe. Consider using wcsncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(257,14): error C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(259,14): error C4996: 'wcsncpy': This function or variable may be unsafe. Consider using wcsncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(293,14): error C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(295,14): error C4996: 'wcscat': This function or variable may be unsafe. Consider using wcscat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(298,14): error C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(300,14): error C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(303,14): error C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(305,14): error C4996: 'wcscat': This function or variable may be unsafe. Consider using wcscat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(307,14): error C4996: 'wcscat': This function or variable may be unsafe. Consider using wcscat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(309,14): error C4996: 'wcscat': This function or variable may be unsafe. Consider using wcscat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(312,14): error C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(314,14): error C4996: 'wcscat': This function or variable may be unsafe. Consider using wcscat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(318,14): error C4996: 'strncat': This function or variable may be unsafe. Consider using strncat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(320,14): error C4996: 'wcsncat': This function or variable may be unsafe. Consider using wcsncat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(323,14): error C4996: 'strncat': This function or variable may be unsafe. Consider using strncat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(325,14): error C4996: 'strncat': This function or variable may be unsafe. Consider using strncat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(328,14): error C4996: 'strncat': This function or variable may be unsafe. Consider using strncat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(330,14): error C4996: 'wcsncat': This function or variable may be unsafe. Consider using wcsncat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(332,14): error C4996: 'wcsncat': This function or variable may be unsafe. Consider using wcsncat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(334,14): error C4996: 'wcsncat': This function or variable may be unsafe. Consider using wcsncat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(337,14): error C4996: 'strncat': This function or variable may be unsafe. Consider using strncat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(339,14): error C4996: 'wcsncat': This function or variable may be unsafe. Consider using wcsncat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(851,14): error C4996: '_wfopen': This function or variable may be unsafe. Consider using _wfopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(853,14): error C4996: '_wfreopen': This function or variable may be unsafe. Consider using _wfreopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(1041,50): error C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(1042,56): error C4996: '_wgetenv': This function or variable may be unsafe. Consider using _wdupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(1044,54): error C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(1045,56): error C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(1047,64): error C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\wxcrt.h(1048,68): error C4996: '_wgetenv': This function or variable may be unsafe. Consider using _wdupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\SDKs\WX314\include\wx\filefn.h(443,14): error C4996: '_wopen': This function or variable may be unsafe. Consider using _wsopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+C:\Users\cresc\source\repos\izc\WP_test\puzzleSolver.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\cresc\source\repos\izc\WP_test\cMain.cpp(334,39): warning C4101: “ia”: 未引用的局部变量
+C:\Users\cresc\source\repos\izc\WP_test\cMain.cpp(447,39): warning C4101: “ia”: 未引用的局部变量
+  code.cpp
+C:\Users\cresc\source\repos\izc\WP_test\code.cpp(122,11): warning C5051: 特性“maybe_unused”至少需要“/std:c++17”；已忽略
+  memory.cpp
+C:\Users\cresc\source\repos\izc\WP_test\memory.cpp(426,21): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\cresc\source\repos\izc\WP_test\memory.cpp(427,22): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\cresc\source\repos\izc\WP_test\memory.cpp(432,21): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\cresc\source\repos\izc\WP_test\memory.cpp(561,24): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\cresc\source\repos\izc\WP_test\memory.cpp(617,34): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\cresc\source\repos\izc\WP_test\memory.cpp(624,20): warning C4018: “<”: 有符号/无符号不匹配
+  memory.h
+C:\Users\cresc\source\repos\izc\WP_test\memory.h(33,20): error C2039: "vector": 不是 "std" 的成员
+C:\SDKs\WX314\include\wx\string.h(4205): message : 参见“std”的声明
+C:\Users\cresc\source\repos\izc\WP_test\memory.h(33,26): error C2061: 语法错误: 标识符“vector”
+C:\Users\cresc\source\repos\izc\WP_test\memory.h(55,8): error C2039: "vector": 不是 "std" 的成员
+C:\SDKs\WX314\include\wx\string.h(4205): message : 参见“std”的声明
+C:\Users\cresc\source\repos\izc\WP_test\memory.h(55,14): error C2143: 语法错误: 缺少“;”(在“<”的前面)
+C:\Users\cresc\source\repos\izc\WP_test\memory.h(55,14): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+C:\Users\cresc\source\repos\izc\WP_test\memory.h(55,54): error C2238: 意外的标记位于“;”之前
+C:\Users\cresc\source\repos\izc\WP_test\memory.h(98,8): error C2039: "vector": 不是 "std" 的成员
+C:\SDKs\WX314\include\wx\string.h(4205): message : 参见“std”的声明
+C:\Users\cresc\source\repos\izc\WP_test\memory.h(98,14): error C2143: 语法错误: 缺少“;”(在“<”的前面)
+C:\Users\cresc\source\repos\izc\WP_test\memory.h(98,14): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+C:\Users\cresc\source\repos\izc\WP_test\memory.h(98,35): error C2039: "vector": 不是 "std" 的成员
+C:\SDKs\WX314\include\wx\string.h(4205): message : 参见“std”的声明
+C:\Users\cresc\source\repos\izc\WP_test\memory.h(98,48): error C2238: 意外的标记位于“;”之前
+C:\Users\cresc\source\repos\izc\WP_test\memory.h(99,8): error C2039: "vector": 不是 "std" 的成员
+C:\SDKs\WX314\include\wx\string.h(4205): message : 参见“std”的声明
+C:\Users\cresc\source\repos\izc\WP_test\memory.h(99,14): error C2143: 语法错误: 缺少“;”(在“<”的前面)
+C:\Users\cresc\source\repos\izc\WP_test\memory.h(99,14): error C4430: 缺少类型说明符 - 假定为 int。注意: C++ 不支持默认 int
+C:\Users\cresc\source\repos\izc\WP_test\memory.h(99,36): error C2039: "vector": 不是 "std" 的成员
+C:\SDKs\WX314\include\wx\string.h(4205): message : 参见“std”的声明
+C:\Users\cresc\source\repos\izc\WP_test\memory.h(99,49): error C2238: 意外的标记位于“;”之前

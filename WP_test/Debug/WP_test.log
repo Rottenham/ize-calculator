@@ -1,4 +1,18 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Enterprise\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(459,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (WP_test.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  LINK : C:\Users\Chenz\source\repos\WP_test\Debug\IZECalculator.exe not found or not built by the last incremental link; performing full link
-Debug\memory.obj : warning LNK4042: object specified more than once; extras ignored
-  WP_test.vcxproj -> C:\Users\Chenz\source\repos\WP_test\Debug\IZECalculator.exe
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppBuild.targets(513,5): warning MSB8028: 中间目录(Debug\)包含从另一个项目(WP_test.vcxproj)共享的文件。   这会导致错误的清除和重新生成行为。
+  cApp.cpp
+  cMain.cpp
+C:\Users\cresc\source\repos\izc\WP_test\puzzleSolver.h(1,1): warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+C:\Users\cresc\source\repos\izc\WP_test\cMain.cpp(334,39): warning C4101: “ia”: 未引用的局部变量
+C:\Users\cresc\source\repos\izc\WP_test\cMain.cpp(447,39): warning C4101: “ia”: 未引用的局部变量
+  code.cpp
+  memory.cpp
+C:\Users\cresc\source\repos\izc\WP_test\memory.cpp(426,21): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\cresc\source\repos\izc\WP_test\memory.cpp(427,22): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\cresc\source\repos\izc\WP_test\memory.cpp(432,21): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\cresc\source\repos\izc\WP_test\memory.cpp(561,24): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\cresc\source\repos\izc\WP_test\memory.cpp(617,34): warning C4018: “<”: 有符号/无符号不匹配
+C:\Users\cresc\source\repos\izc\WP_test\memory.cpp(624,20): warning C4018: “<”: 有符号/无符号不匹配
+  memory.h
+  正在生成代码...
+Debug\memory.obj : warning LNK4042: 对象被多次指定；已忽略多余的指定
+  WP_test.vcxproj -> C:\Users\cresc\source\repos\izc\Debug\IZECalculator.exe

@@ -97,7 +97,7 @@ EVT_HOTKEY(HOTKEY_ID_1, OnHotKey1)
 EVT_THREAD(MYTHREAD_UPDATE, OnThreadUpdate)
 wxEND_EVENT_TABLE()
 
-string curr_version = "1.5.8";
+string curr_version = "1.5.9";
 
 cMain::cMain() : wxFrame(nullptr, wxID_ANY, "IZE血量计算器 v" + curr_version, wxDefaultPosition, wxSize(348, 450), (wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) | wxWANTS_CHARS) {
 	this->RegisterHotKey(HOTKEY_ID_1, (wxMOD_CONTROL), 0x44);
@@ -184,7 +184,7 @@ void cMain::OnExit(wxCommandEvent& evt) {
 }
 
 void cMain::OnAbout(wxCommandEvent& evt) {
-	wxMessageBox("这是一个用于计算IZE单破血量的计算器。\n\n版本号: v" + curr_version + "\n\n开发者: Crescendo\nbilibili: Crescebdo\n贴吧: Crescendo\n\n使用工具: Visual Studio 2019, wxWidgets 3.1.4",
+	wxMessageBox("这是一个用于计算IZE单破血量的计算器。\n\n版本号: v" + curr_version + "\n\n开发者: Crescendo\nbilibili: Crescebdo\n贴吧: Crescendo\n\n使用工具: Visual Studio 2019, wxWidgets 3.1.4\n\n源码以 3-Clause BSD 许可证公开: https://github.com/Rottenham/izc",
 		"关于IZE计算器", wxOK);
 }
 

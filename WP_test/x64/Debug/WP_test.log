@@ -1,0 +1,14 @@
+﻿  cApp.cpp
+C:\Users\cresc\source\repos\izc\WP_test\cApp.h(3,10): fatal error C1083: 无法打开包括文件: “wx/wx.h”: No such file or directory
+  cMain.cpp
+C:\Users\cresc\source\repos\izc\WP_test\cMain.cpp(3,10): fatal error C1083: 无法打开包括文件: “wx/clipbrd.h”: No such file or directory
+  code.cpp
+C:\Users\cresc\source\repos\izc\WP_test\code.cpp(110,90): error C2664: “BOOL WriteProcessMemory(HANDLE,LPVOID,LPCVOID,SIZE_T,SIZE_T *)”: 无法将参数 5 从“DWORD *”转换为“SIZE_T *”
+C:\Users\cresc\source\repos\izc\WP_test\code.cpp(110,79): message : 与指向的类型无关；强制转换要求 reinterpret_cast、C 样式强制转换或函数样式强制转换
+C:\Program Files (x86)\Windows Kits\10\Include\10.0.19041.0\um\memoryapi.h(172,1): message : 参见“WriteProcessMemory”的声明
+C:\Users\cresc\source\repos\izc\WP_test\code.cpp(122,11): warning C5051: 特性“maybe_unused”至少需要“/std:c++17”；已忽略
+  memory.cpp
+C:\Users\cresc\source\repos\izc\WP_test\memory.h(12,10): fatal error C1083: 无法打开包括文件: “wx/string.h”: No such file or directory
+  memory.h
+C:\Users\cresc\source\repos\izc\WP_test\memory.h(12,10): fatal error C1083: 无法打开包括文件: “wx/string.h”: No such file or directory
+  正在生成代码...
