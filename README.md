@@ -38,8 +38,4 @@
 
 开发者: Crescendo
 
-bilibili: Crescebdo
-
-贴吧: Crescendo
-
 使用工具: Visual Studio 2019, wxWidgets 3.1.4
