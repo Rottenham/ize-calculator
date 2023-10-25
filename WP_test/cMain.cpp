@@ -97,7 +97,7 @@ EVT_HOTKEY(HOTKEY_ID_1, OnHotKey1)
 EVT_THREAD(MYTHREAD_UPDATE, OnThreadUpdate)
 wxEND_EVENT_TABLE()
 
-string curr_version = "1.5.9";
+string curr_version = "1.5.10_unreleased";
 
 cMain::cMain() : wxFrame(nullptr, wxID_ANY, "IZE血量计算器 v" + curr_version, wxDefaultPosition, wxSize(348, 450), (wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) | wxWANTS_CHARS) {
 	this->RegisterHotKey(HOTKEY_ID_1, (wxMOD_CONTROL), 0x44);
@@ -612,7 +612,11 @@ void cMain::SetValues() {
 	}
 	int** plants = mem.readPlants(a_menuSettings->IsChecked(ID_BGRUN), false, scoreMode, a_menuSettings->IsChecked(ID_GAMESPEED));
 	if (plants == nullptr) {
-		SetStatusText(wxT("尚未进入IZE"), 0);
+		if (auto sb = this->GetStatusBar()) {
+			if (sb->GetStatusText(0) == "") {
+				SetStatusText(wxT("尚未进入IZE"), 0);
+			}
+		}
 		resetStyle();
 	}
 	else {
@@ -621,7 +625,11 @@ void cMain::SetValues() {
 		if (a_menuSettings->IsChecked(ID_AUTOCLT)) {
 			mem.setAuto(true);
 		}
-		SetStatusText(wxT(""), 0);
+		if (auto sb = this->GetStatusBar()) {
+			if (sb->GetStatusText(0) == "尚未进入IZE") {
+				SetStatusText(wxT(""), 0);
+			}
+		}
 		Puzzle puzzle = Puzzle(plants, mem.getQX());
 		string** result = puzzle.result;
 		int** highlight = puzzle.highlight;
