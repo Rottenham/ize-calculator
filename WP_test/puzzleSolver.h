@@ -6,10 +6,6 @@
 
 using namespace std;
 
-//#ifndef _DEBUG
-//def _DEBUG
-//#endif 
-
 const double KERNAL_RATE = 0.61;
 
 double getButterRate(int i) {

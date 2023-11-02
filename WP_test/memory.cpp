@@ -423,13 +423,13 @@ namespace IZE {
 		if (plants.size() < 2) return;
 
 		// sort
-		for (int i = 0; i < plants.size() - 1; i++)
-			for (int j = 0; j < plants.size() - 1 - i; j++)
+		for (size_t i = 0; i < plants.size() - 1; i++)
+			for (size_t j = 0; j < plants.size() - 1 - i; j++)
 				if (index[plants.at(j).first][plants.at(j).second] > index[plants.at(j + 1).first][plants.at(j + 1).second]) {
 					std::swap(plants[j], plants[j + 1]);
 				}
 
-		for (int i = 1; i < plants.size(); i++) {
+		for (size_t i = 1; i < plants.size(); i++) {
 			round[plants.at(i).first][plants.at(i).second] = i + 1;
 		}
 	}
@@ -558,7 +558,7 @@ namespace IZE {
 	// 将待布置的植物插入至vector中合适的位置
 	// 先检查vector大小，若不够先扩容
 	void Memory::update(std::vector<int**>& result, wxString chr, int row, int col, int round) {
-		while (result.size() < round) {
+		while (static_cast<int>(result.size()) < round) {
 			int** puzzle = new int* [5];
 			for (int i = 0; i < 5; i++) {
 				puzzle[i] = new int[5];
@@ -614,7 +614,7 @@ namespace IZE {
 			}
 			for (int r = 0; r < repeat; r++) {
 				size_t col = 0;
-				for (int i = 0; col < 5 && i < line.size(); i++) {
+				for (size_t i = 0; col < 5 && i < line.size(); i++) {
 					wxString currentChar = line.substr(i, 1);
 					if (currentChar == "*") {
 						break;

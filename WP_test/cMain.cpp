@@ -97,7 +97,7 @@ EVT_HOTKEY(HOTKEY_ID_1, OnHotKey1)
 EVT_THREAD(MYTHREAD_UPDATE, OnThreadUpdate)
 wxEND_EVENT_TABLE()
 
-string curr_version = "1.5.10_unreleased";
+string curr_version = "1.5.10";
 
 cMain::cMain() : wxFrame(nullptr, wxID_ANY, "IZE血量计算器 v" + curr_version, wxDefaultPosition, wxSize(348, 450), (wxDEFAULT_FRAME_STYLE & ~(wxRESIZE_BORDER | wxMAXIMIZE_BOX)) | wxWANTS_CHARS) {
 	this->RegisterHotKey(HOTKEY_ID_1, (wxMOD_CONTROL), 0x44);
@@ -331,7 +331,7 @@ void cMain::OnRateButtonClicked(wxCommandEvent& evt) {
 		c_output->SetLabel(rate);
 		c_output->Refresh();
 	}
-	catch (const std::invalid_argument & ia) {
+	catch (const std::invalid_argument &) {
 		c_output->SetLabel("输入格式错误");
 		c_output->Refresh();
 		return;
@@ -444,7 +444,7 @@ void cMain::OnScoreCalcButtonClicked(wxCommandEvent& evt) {
 		d_output->SetLabel(str);
 		d_output->Refresh();
 	}
-	catch (const std::invalid_argument & ia) {
+	catch (const std::invalid_argument &) {
 		d_output->SetLabel("输入格式错误");
 		d_output->Refresh();
 		return;
