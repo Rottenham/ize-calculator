@@ -40,6 +40,13 @@
 
 使用工具: Visual Studio 2019, wxWidgets 3.1.4
 
+
+## 构建本项目
+
+请先确保你的 Windows 上已安装 Visual Studio 2019 与 wxWidgets 3.1.4, 并正确设定 `WXWIN` 环境变量.
+
+克隆本项目到本地, 在 Visual Studio 中打开 .sln 文件, 修改构建模式为 `Debug x86`, 重新生成解决方案后运行即可.
+
 由于 wxWidgets 安装过程较为繁琐, 亦可下载由我自行打包的[该版本的全部文件](https://drive.google.com/file/d/1jHZyeFmPNTIBPLFEAORByoPlzTk8iv5T/view). 将其压缩至任意目录, 然后添加以下环境变量:
 - WXDRIVE_START_ARGS = `--wxdrive-setting=0 --disable-gpu --disable-software-rasterizer --enable-features=NetworkServiceInProcess`
 - WXWIN = 解压至的目录
